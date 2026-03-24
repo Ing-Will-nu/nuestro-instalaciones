@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nuestro — Registro de Instalación</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --azul:          #2E86DE;
+    --azul-dark:     #1a6cbf;
+    --azul-light:    #e8f2fc;
+    --purpura:       #A855F7;
+    --purpura-light: #f3e8ff;
+    --verde:         #10B981;
+    --verde-light:   #d1fae5;
+    --gris:          #64748B;
+    --naranja:       #F59E0B;
+    --naranja-light: #fef3c7;
+    --bg:            #F7F9FC;
+    --bg2:           #FFFFFF;
+    --border:        #E2E8F0;
+    --border2:       #CBD5E1;
+    --text:          #1E293B;
+    --text2:         #475569;
+    --muted:         #94A3B8;
+    --radius:        14px;
+    --radius-sm:     10px;
+    --shadow:        0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  .logo-pill {
+    width: 38px; height: 38px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .logo-pill img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .header-text h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--azul);
+    letter-spacing: -0.01em;
+  }
+
+  .header-text p {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    background: var(--bg2);
+    padding: 12px 20px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .segs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+
+  .seg {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+
+  .seg.done   { background: linear-gradient(90deg, var(--azul), var(--purpura)); }
+  .seg.active { background: var(--azul); }
+
+  .prog-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .prog-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--azul);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .prog-count {
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* SECTIONS */
+  .section {
+    display: none;
+    padding: 22px 20px 0;
+    animation: up 0.25s ease;
+  }
+
+  .section.active { display: block; }
+
+  @keyframes up {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .sec-header { margin-bottom: 20px; }
+
+  .sec-badge {
+    display: inline-block;
+    background: var(--azul-light);
+    color: var(--azul);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+
+  .sec-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .sec-desc {
+    font-size: 0.78rem;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  /* FIELD */
+  .field { margin-bottom: 16px; }
+  .field:last-child { margin-bottom: 0; }
+
+  .lbl {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .lbl .r { color: var(--azul); margin-left: 2px; }
+
+  .hint {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 1px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1.5px solid var(--border2);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 11px 13px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input:focus, textarea:focus {
+    border-color: var(--azul);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(46,134,222,0.1);
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--muted); font-weight: 400; }
+
+  textarea { min-height: 86px; resize: vertical; line-height: 1.5; }
+
+  /* GPS */
+  .gps-wrap {
+    background: var(--bg);
+    border: 1.5px solid var(--border2);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+
+  .gps-wrap.capturing { border-color: var(--azul); background: var(--azul-light); }
+  .gps-wrap.gps-ok    { border-color: var(--verde); background: var(--verde-light); }
+  .gps-wrap.gps-fail  { border-color: #f87171; background: #fef2f2; }
+
+  .gps-ic {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .gps-wrap.capturing .gps-ic { background: var(--azul); animation: pulse 1s infinite; }
+  .gps-wrap.gps-ok .gps-ic    { background: var(--verde); }
+
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
+
+  .gps-body { flex: 1; min-width: 0; }
+
+  .gps-st {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text2);
+    margin-bottom: 2px;
+  }
+
+  .gps-wrap.capturing .gps-st { color: var(--azul-dark); }
+  .gps-wrap.gps-ok .gps-st    { color: #065f46; }
+  .gps-wrap.gps-fail .gps-st  { color: #b91c1c; }
+
+  .gps-coord {
+    font-size: 0.66rem;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gps-wrap.gps-ok .gps-coord { color: #065f46; }
+
+  .btn-gps {
+    background: var(--azul);
+    border: none;
+    border-radius: 7px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 700;
+    padding: 7px 11px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+
+  .btn-gps:hover { background: var(--azul-dark); }
+  .btn-gps:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* PLANS */
+  .plan-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .plan-opt {
+    border: 2px solid var(--border2);
+    border-radius: var(--radius-sm);
+    padding: 15px 10px 13px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    background: var(--bg);
+  }
+
+  .plan-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .plan-opt:has(input:checked) {
+    border-color: var(--azul);
+    background: var(--azul-light);
+    box-shadow: 0 0 0 3px rgba(46,134,222,0.1);
+  }
+
+  .p-speed {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--azul);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .p-unit {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--gris);
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+
+  .p-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* PHOTOS */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .ph-lbl {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.63rem;
+    font-weight: 700;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+
+  .ph-lbl .r { color: var(--azul); }
+
+  .ph-box {
+    border: 2px dashed var(--border2);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    padding: 16px 8px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s;
+    min-height: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ph-box:hover { border-color: var(--azul); background: var(--azul-light); }
+
+  .ph-box.taken {
+    border-style: solid;
+    border-color: var(--purpura);
+    padding: 0;
+  }
+
+  .ph-box input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+
+  .ph-ph { pointer-events: none; }
+
+  .ph-emoji { font-size: 1.5rem; display: block; margin-bottom: 5px; }
+
+  .ph-txt {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.63rem;
+    font-weight: 700;
+    color: var(--text2);
+    margin-bottom: 2px;
+  }
+
+  .ph-sub {
+    font-size: 0.58rem;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  .ph-prev {
+    width: 100%;
+    height: 108px;
+    object-fit: cover;
+    border-radius: calc(var(--radius-sm) - 2px);
+    display: none;
+  }
+
+  .ph-box.taken .ph-prev { display: block; }
+  .ph-box.taken .ph-ph   { display: none; }
+
+  .ph-retake {
+    position: absolute;
+    bottom: 5px; right: 5px;
+    background: rgba(0,0,0,0.5);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.56rem;
+    font-weight: 700;
+    padding: 3px 6px;
+    pointer-events: none;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* CONFIRM */
+  .confirm-box {
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    box-shadow: var(--shadow);
+  }
+
+  .confirm-box:has(input:checked) {
+    border-color: var(--verde);
+    background: var(--verde-light);
+  }
+
+  .confirm-box input[type="checkbox"] {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+    accent-color: var(--verde);
+    cursor: pointer;
+    margin-top: 2px;
+  }
+
+  .confirm-txt {
+    font-size: 0.83rem;
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  .confirm-txt strong {
+    display: block;
+    font-weight: 700;
+    color: var(--verde);
+    margin-bottom: 2px;
+  }
+
+  /* RESUMEN */
+  .resumen {
+    background: linear-gradient(135deg, var(--azul-light), var(--purpura-light));
+    border: 1.5px solid #c7d9f5;
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+
+  .res-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--azul);
+    margin-bottom: 5px;
+  }
+
+  .res-nombre {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .res-div {
+    height: 1px;
+    background: #c7d9f5;
+    margin: 8px 0;
+  }
+
+  .res-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 4px 0;
+  }
+
+  .res-k {
+    font-size: 0.7rem;
+    color: var(--text2);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .res-v {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text);
+    text-align: right;
+  }
+
+  /* ERRORS */
+  .ferr {
+    font-size: 0.66rem;
+    color: #dc2626;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 5px;
+    display: none;
+  }
+
+  .ferr.on { display: block; }
+
+  /* 2-col */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+    z-index: 99;
+  }
+
+  .btn-back {
+    background: transparent;
+    border: 1.5px solid var(--border2);
+    border-radius: var(--radius-sm);
+    color: var(--text2);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 12px 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-back:hover { border-color: var(--azul); color: var(--azul); }
+
+  .btn-next {
+    flex: 1;
+    background: var(--azul);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 12px 20px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .btn-next:hover  { background: var(--azul-dark); }
+  .btn-next:active { transform: scale(0.98); }
+
+  .btn-submit {
+    flex: 1;
+    background: linear-gradient(135deg, var(--verde), #059669);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 12px 20px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+
+  .btn-submit:active { transform: scale(0.98); }
+
+  /* SUCCESS */
+  #screen-ok {
+    display: none;
+    padding: 50px 22px 40px;
+    text-align: center;
+    animation: up 0.4s ease;
+  }
+
+  #screen-ok.on { display: block; }
+
+  .ok-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--verde-light);
+    border: 2px solid var(--verde);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 20px;
+  }
+
+  .ok-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .ok-desc {
+    font-size: 0.82rem;
+    color: var(--text2);
+    line-height: 1.6;
+    max-width: 290px;
+    margin: 0 auto 26px;
+  }
+
+  .ok-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    text-align: left;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow);
+  }
+
+  .ok-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--azul);
+    margin-bottom: 5px;
+  }
+
+  .ok-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .ok-det { font-size: 0.76rem; color: var(--text2); }
+
+  .btn-new {
+    width: 100%;
+    background: var(--bg2);
+    border: 1.5px solid var(--border2);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 13px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-new:hover { border-color: var(--azul); color: var(--azul); }
+
+  /* LOADING */
+  #loading {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(247,249,252,0.9);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  #loading.on { display: flex; }
+
+  .spin {
+    width: 40px; height: 40px;
+    border: 3px solid var(--border2);
+    border-top-color: var(--azul);
+    border-radius: 50%;
+    animation: rot 0.7s linear infinite;
+  }
+
+  @keyframes rot { to { transform: rotate(360deg); } }
+
+  .load-txt {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text2);
+  }
+
+  @media (max-width: 340px) {
+    .plan-grid, .photo-grid, .two { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo-pill"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAQMBAwDACIAAREBAhEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMAAAERAhEAPwD3XPtRn2oIoArMBKKKKACl/GkooAXtSUtJQmAUuTRSU73AKKKWkAfhSfhS9qSgA7UUUUALnikNFFABRRTu/SgAxRikpaAAUlKKKBgaSlooEJRRRQAlLRSigBKKXvQKAEpKWigBRSUUUAJS0UvagBKSlpKBjqSikoAWiil/CgBKSiigBaKKKBC0UUUABpKd+FGeKdwGUtLS5ouA2inUUgF5o5oooATnNLzRnNFAB2o5oooAOaKKKADmjmjNFACdKOtLSCgBeaKKSgApTmiigA5pPyo60GgANFApaAG80Zpeooz7UANop2RRn2oAbS9qSigApTSUUAJS0UuaADmjtSUUAKKO9JRQMKSlooEFFFFACikpc0lABSmm0tA7hRRRQIKKKKACjFL3pKbYwpRSUUgCiiigBaKKKACiiigA5pKWkoEFFLxnpRQAhzSU40GgBtOA/Om0UADUgpTzQKAHCikFLQBZooorQCqetKKT60VmAlFFFABRRRQAUUUUAFFFFAwooNFAgooooAO1AoooAKOaBS45oAWjvRRQMSlNBoFABRQaShIQtFA6UUDEoopKBC0UUUDCl4pKKBBRRRQAUtJRQAvFApKKACiiiqGJRS0opXENpaWjvRcBKKdml/CkAlFFLQAgpcUUUAFFFFABSUtFABRRRQAg4paKKACiiigAooooAKKSloAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo/Ciigdg/Cm06koENpe9LRmgBKSloNNANpaKKQCU7NNp2KAEopTSZoAWm0tJTCw40lJRQAtFJS0gF4pKSinYBe9JRRSGLRRS5oASlozRQAUUUUCCjtSUpoGJRRRQAUUUUCD1ozRSUAFFHaigAooooAKKKO1ABRiiigAFFFFAFuiiitAKlOzSelHeswEooooGFFFLQIKSlpOlAC80lAooAKKKKADPPSiiigApQKMZNLQAlLRSUDFozSUUAFHNLRQAlFJS0AFFFFABS5o702gBaUdaO9JQAUUUUAFFFFAhe9JRRQAppKKKACindKM0AJTu9FFABRmiincAooopAFFFIeKAFooooAKKKKACikooAWjNIaO3NAC0UUfhQAUUUUAFFFJQAUUtJQAUuaQUuaADNJmil70AGaKQ0vNABRRSUALRSUtABRRRQAUUUUAFFFFABRRRQAlFFFABRRRQAUtJS0XCwYpOtLRQAylxTqTNACdBSE0Ud+KAEoopec0AJRRRQAuaSiigYUUUvegBKXiikoAKKKKACiiigB1GRmm0vpQAUUUUMBKXtR36UlABS54o5pKACjNFLzQISiiigA7UUZFFAB0ooooAKKKBQAUUGigC3RRRWgFSlHWkNA4rMAopaSgYUUUUCA0daKOgoAKKKBQAUtGOaSgYUUtAFAhfekpaKBiUp6UGkxQAfjRj3owKMUAJRRRQIKWkooAWikpfwoGFL2o/CjFAAMetApKKACiiigA5zRS9aMUCCilHTNLQAcUYoxRQAUUUUAFFFFABRRRQAUUUUAH40lBooAWigfSjvQAdqPak/Gl70AHFJ7ZoooAUdKSl/Ckx3oAKWjFJQAtHaiigAozQPWigAopKWgBO/WilowKACiiigApPpS0UAFFFFABRRRQAUYoooAM0UUUAFJS0UAFFFFACYo4pcUUAFFFFACY96XmkpaACkpaKAEpeKTHeigAxzRjAopeKAGUvFKKM0ANopTSUAJRRRTAKKWjikAlFFFAwooooAKKKKACl70Y5pSBTuAlFFApAFFKKKBBRRSUAHfNJRQQaBhwDil4o4pKBBRQaKACiiigAoooNAAaKO/WjtQBbooorQCpSjNJ3pRmswEoopc0AHejFIS96ACkxmiigYdKKKKBBRRTh1oAKKKKBhQfaik70AJRS0lABS/jRSmgQnail/Ck/CgBKcOlJRQAlLSUvegYUUUUCF4oHSjHtRQAUU7oBRmgBKMc0tFACUtFFABRRRQAUUenFFABRRRQAUUUUAHakpaSgBeKKTiloAKTIpaOPSgBDRij6UUALSUUtACUUv0o4oAT2opeM5xRxQAlLRRQAYopDS0AFFFFABRSZxS5B7UAFFFHWgAooooAKKKKACiijigAooozQAUUUUAFFFFABRRRQAgpaSloAB0ooooAKKKKACkpaKAEooooAKKX8KOKAE79aWj8KKAEoxS0dqB2G4pKd3pMUCExSUtLx6UAGaSlo4pgNooopAFFFFAwpaSigAoopfwoEGeaUUg60ChgFLRSUhhSgetGKKYCUlOo4oENooooAKKKKACiijvQAc0HpRQaALdFFFaAVhSUo60lZgKabRRQAUUd6KACiiigAoopce9AABmlpKWkAUdqDSZzTGJRS9qUUAJRRSigQlHH50v40enNADacKB0pKAEpwo5zTaAClpKKAFpaXHvRx60ALijFGB60UAFGaKKACiiigAooooAPrRRj3oAoAKKKKACiijNABRRRQAUUfjRigAGKKMe9GKACj8aKKACiiigAooo+lABRS45pCMjrQAUUUUAFFFFABRRRQAUUUYz3oAOKXigDnrScUAFFFFABRRRQAUUUUAFFFFAB70UuB60lABxRRRxQAUUUcUAJ9aWjFGKAEFLRQRQAlHtS8UlAC0UUUAJS0UUAFH5UUYFABRRgetFABRSUtABRRRQAUhpcd6KAG0U7AxSYGKAExSUvSg0ANooooAKKKd3oASilxz1oxQADrSUYHrSUAONNoooGLmlzSelGabQ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" alt="Nuestro logo"></div>
+  <div class="header-text">
+    <h1>Nuestro</h1>
+    <p>El internet que funciona · Registro de instalación</p>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="segs">
+    <div class="seg active" id="seg1"></div>
+    <div class="seg" id="seg2"></div>
+    <div class="seg" id="seg3"></div>
+    <div class="seg" id="seg4"></div>
+  </div>
+  <div class="prog-info">
+    <span class="prog-name" id="pname">Identificación del cliente</span>
+    <span class="prog-count"><span id="pcur">1</span> / 4</span>
+  </div>
+</div>
+
+<form id="form" novalidate>
+
+  <!-- S1 -->
+  <div class="section active" id="s1">
+    <div class="sec-header">
+      <div class="sec-badge">01 · Datos del cliente</div>
+      <div class="sec-title">Identificación del cliente</div>
+      <div class="sec-desc">Datos básicos del titular y ubicación GPS del inmueble.</div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label class="lbl" for="nombre">Nombre completo <span class="r">*</span></label>
+        <input type="text" id="nombre" placeholder="Ej: María Fernanda López Ruiz">
+        <div class="ferr" id="e-nombre">Campo obligatorio.</div>
+      </div>
+      <div class="field">
+        <label class="lbl" for="tel">Teléfono <span class="r">*</span></label>
+        <input type="tel" id="tel" placeholder="Ej: 3001234567" inputmode="numeric">
+        <div class="ferr" id="e-tel">Campo obligatorio.</div>
+      </div>
+      <div class="field">
+        <label class="lbl" for="contacto">Correo o WhatsApp <span class="r">*</span>
+          <span class="hint">Para enviar el comprobante de instalación</span>
+        </label>
+        <input type="text" id="contacto" placeholder="correo@ejemplo.com  ó  3001234567">
+        <div class="ferr" id="e-contacto">Campo obligatorio.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label class="lbl">Plan contratado <span class="r">*</span></label>
+        <div class="plan-grid">
+          <label class="plan-opt">
+            <input type="radio" name="plan" value="Nuestro Hogar - 50 Mbps">
+            <div class="p-speed">50</div>
+            <div class="p-unit">Mbps</div>
+            <div class="p-name">Nuestro Hogar</div>
+          </label>
+          <label class="plan-opt">
+            <input type="radio" name="plan" value="Nuestro Negocio - 100 Mbps">
+            <div class="p-speed">100</div>
+            <div class="p-unit">Mbps</div>
+            <div class="p-name">Nuestro Negocio</div>
+          </label>
+        </div>
+        <div class="ferr" id="e-plan">Selecciona un plan.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label class="lbl">Ubicación GPS <span class="r">*</span>
+          <span class="hint">Captura automática — presiona el botón</span>
+        </label>
+        <div class="gps-wrap" id="gw">
+          <div class="gps-ic" id="gic">📍</div>
+          <div class="gps-body">
+            <div class="gps-st" id="gst">Sin capturar</div>
+            <div class="gps-coord" id="gc">Toca "Capturar" para obtener coordenadas</div>
+          </div>
+          <button type="button" class="btn-gps" id="bgps" onclick="captureGPS()">Capturar</button>
+        </div>
+        <input type="hidden" id="glat">
+        <input type="hidden" id="glng">
+        <input type="hidden" id="gacc">
+        <div class="ferr" id="e-gps">Captura la ubicación GPS antes de continuar.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <div class="sec-badge">02 · Datos técnicos</div>
+      <div class="sec-title">Datos de la conexión</div>
+      <div class="sec-desc">Información técnica de la instalación en la red FTTH.</div>
+    </div>
+
+    <div class="card">
+      <div class="two">
+        <div class="field">
+          <label class="lbl" for="nap">Caja NAP <span class="r">*</span></label>
+          <input type="text" id="nap" placeholder="Ej: NAP-03" style="text-transform:uppercase">
+          <div class="ferr" id="e-nap">Obligatorio.</div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="puerto">Puerto <span class="r">*</span></label>
+          <input type="number" id="puerto" placeholder="Ej: 4" min="1" max="32" inputmode="numeric">
+          <div class="ferr" id="e-puerto">Obligatorio.</div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="lbl" for="fibra">Metros de fibra drop <span class="r">*</span></label>
+        <input type="number" id="fibra" placeholder="Ej: 45" min="1" inputmode="numeric">
+        <div class="ferr" id="e-fibra">Campo obligatorio.</div>
+      </div>
+      <div class="field">
+        <label class="lbl" for="ontloc">Ubicación del ONT <span class="r">*</span>
+          <span class="hint">Describe con detalle dónde quedó instalado el equipo</span>
+        </label>
+        <textarea id="ontloc" placeholder="Ej: Sala principal, pared lateral derecha al entrar, altura 1.6 m sobre el piso, cerca al tomacorriente."></textarea>
+        <div class="ferr" id="e-ont">Describe la ubicación del ONT.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label class="lbl" for="tec">Nombre del técnico <span class="r">*</span></label>
+        <input type="text" id="tec" placeholder="Nombre completo del técnico">
+        <div class="ferr" id="e-tec">Campo obligatorio.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <div class="sec-badge">03 · Evidencia fotográfica</div>
+      <div class="sec-title">Registro fotográfico</div>
+      <div class="sec-desc">Seis fotos obligatorias. Toca cada recuadro para abrir la cámara.</div>
+    </div>
+
+    <div class="card">
+      <div class="photo-grid">
+
+        <div>
+          <span class="ph-lbl">Fachada <span class="r">*</span></span>
+          <label class="ph-box" id="pb0">
+            <input type="file" accept="image/*" capture="environment" id="pf0" onchange="prev(this,'pb0','pp0')">
+            <div class="ph-ph"><span class="ph-emoji">🏠</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Desde la calle, número visible</div></div>
+            <img class="ph-prev" id="pp0" alt=""><button class="ph-retake" type="button">Retomar</button>
+          </label>
+          <div class="ferr" id="e-p0">Foto obligatoria.</div>
+        </div>
+
+        <div>
+          <span class="ph-lbl">ONT instalado <span class="r">*</span></span>
+          <label class="ph-box" id="pb1">
+            <input type="file" accept="image/*" capture="environment" id="pf1" onchange="prev(this,'pb1','pp1')">
+            <div class="ph-ph"><span class="ph-emoji">📡</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">ONT en ubicación final</div></div>
+            <img class="ph-prev" id="pp1" alt=""><button class="ph-retake" type="button">Retomar</button>
+          </label>
+          <div class="ferr" id="e-p1">Foto obligatoria.</div>
+        </div>
+
+        <div>
+          <span class="ph-lbl">Etiqueta ONT <span class="r">*</span></span>
+          <label class="ph-box" id="pb2">
+            <input type="file" accept="image/*" capture="environment" id="pf2" onchange="prev(this,'pb2','pp2')">
+            <div class="ph-ph"><span class="ph-emoji">🔖</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Número de serie legible</div></div>
+            <img class="ph-prev" id="pp2" alt=""><button class="ph-retake" type="button">Retomar</button>
+          </label>
+          <div class="ferr" id="e-p2">Foto obligatoria.</div>
+        </div>
+
+        <div>
+          <span class="ph-lbl">Conexión NAP <span class="r">*</span></span>
+          <label class="ph-box" id="pb3">
+            <input type="file" accept="image/*" capture="environment" id="pf3" onchange="prev(this,'pb3','pp3')">
+            <div class="ph-ph"><span class="ph-emoji">🔌</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Puerto utilizado visible</div></div>
+            <img class="ph-prev" id="pp3" alt=""><button class="ph-retake" type="button">Retomar</button>
+          </label>
+          <div class="ferr" id="e-p3">Foto obligatoria.</div>
+        </div>
+
+        <div>
+          <span class="ph-lbl">Cédula — frente <span class="r">*</span></span>
+          <label class="ph-box" id="pb4">
+            <input type="file" accept="image/*" capture="environment" id="pf4" onchange="prev(this,'pb4','pp4')">
+            <div class="ph-ph"><span class="ph-emoji">🪪</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Nombre y número legibles</div></div>
+            <img class="ph-prev" id="pp4" alt=""><button class="ph-retake" type="button">Retomar</button>
+          </label>
+          <div class="ferr" id="e-p4">Foto obligatoria.</div>
+        </div>
+
+        <div>
+          <span class="ph-lbl">Cédula — reverso <span class="r">*</span></span>
+          <label class="ph-box" id="pb5">
+            <input type="file" accept="image/*" capture="environment" id="pf5" onchange="prev(this,'pb5','pp5')">
+            <div class="ph-ph"><span class="ph-emoji">🪪</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Reverso del documento</div></div>
+            <img class="ph-prev" id="pp5" alt=""><button class="ph-retake" type="button">Retomar</button>
+          </label>
+          <div class="ferr" id="e-p5">Foto obligatoria.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label class="lbl" for="obs">Observaciones adicionales
+          <span class="hint">Opcional — detalles relevantes de la instalación</span>
+        </label>
+        <textarea id="obs" placeholder="Ej: El cliente tiene mascota. Acceso al medidor requiere llave. Se usó manguera en tramo exterior."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <div class="sec-badge">04 · Cierre</div>
+      <div class="sec-title">Confirmación del cliente</div>
+      <div class="sec-desc">Muéstrale este resumen al cliente. Si está conforme, marca la casilla y envía.</div>
+    </div>
+
+    <div class="resumen">
+      <div class="res-tag">Resumen de instalación</div>
+      <div class="res-nombre" id="rn">—</div>
+      <div class="res-row"><span class="res-k">Plan</span><span class="res-v" id="rp">—</span></div>
+      <div class="res-div"></div>
+      <div class="res-row"><span class="res-k">Caja NAP</span><span class="res-v" id="rn2">—</span></div>
+      <div class="res-row"><span class="res-k">Puerto</span><span class="res-v" id="rpu">—</span></div>
+      <div class="res-row"><span class="res-k">Fibra usada</span><span class="res-v" id="rf">—</span></div>
+      <div class="res-row"><span class="res-k">ONT</span><span class="res-v" id="ro">—</span></div>
+      <div class="res-div"></div>
+      <div class="res-row"><span class="res-k">GPS</span><span class="res-v" id="rg">—</span></div>
+    </div>
+
+    <label class="confirm-box" for="conf">
+      <input type="checkbox" id="conf">
+      <div class="confirm-txt">
+        <strong>Recibo a satisfacción ✓</strong>
+        Confirmo que el servicio de internet fue instalado correctamente en mi inmueble y que los equipos funcionan según lo acordado con Nuestro Internet.
+      </div>
+    </label>
+    <div class="ferr" id="e-conf" style="margin-top:8px;">El cliente debe confirmar la recepción del servicio.</div>
+  </div>
+
+</form>
+
+<div class="nav" id="nav">
+  <button type="button" class="btn-back" id="bbk" onclick="goBack()" style="display:none;">← Atrás</button>
+  <button type="button" class="btn-next" id="bnx" onclick="goNext()">Continuar →</button>
+</div>
+
+<div id="screen-ok">
+  <div class="ok-circle">✓</div>
+  <div class="ok-title">¡Instalación registrada!</div>
+  <div class="ok-desc">Los datos fueron guardados correctamente. El comprobante será enviado al cliente.</div>
+  <div class="ok-card">
+    <div class="ok-tag">Cliente registrado</div>
+    <div class="ok-name" id="dn">—</div>
+    <div class="ok-det" id="dp">—</div>
+    <div class="ok-det" id="dd" style="margin-top:3px;">—</div>
+  </div>
+  <button class="btn-new" onclick="resetForm()">+ Nueva instalación</button>
+</div>
+
+<div id="loading">
+  <div class="spin"></div>
+  <div class="load-txt">Enviando registro...</div>
+</div>
+
+<script>
+  let cur = 1;
+  const NAMES = ['Identificación del cliente','Datos de la conexión','Registro fotográfico','Confirmación del cliente'];
+  let GPS = { lat: null, lng: null, acc: null };
+
+  function captureGPS() {
+    const gw = document.getElementById('gw');
+    const gic = document.getElementById('gic');
+    const gst = document.getElementById('gst');
+    const gc  = document.getElementById('gc');
+    const btn = document.getElementById('bgps');
+
+    gw.className = 'gps-wrap capturing';
+    gst.textContent = 'Capturando ubicación...';
+    gc.textContent  = 'Esperando señal GPS';
+    gic.textContent = '⏳';
+    btn.disabled    = true;
+
+    if (!navigator.geolocation) {
+      gw.className = 'gps-wrap gps-fail';
+      gst.textContent = 'GPS no disponible';
+      gc.textContent  = 'Este dispositivo no soporta geolocalización';
+      btn.disabled = false; return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      p => {
+        GPS.lat = p.coords.latitude.toFixed(7);
+        GPS.lng = p.coords.longitude.toFixed(7);
+        GPS.acc = Math.round(p.coords.accuracy);
+        document.getElementById('glat').value = GPS.lat;
+        document.getElementById('glng').value = GPS.lng;
+        document.getElementById('gacc').value = GPS.acc;
+        gw.className = 'gps-wrap gps-ok';
+        gic.textContent = '✓';
+        gst.textContent = `Capturado · Precisión ±${GPS.acc}m`;
+        gc.textContent  = `${GPS.lat}, ${GPS.lng}`;
+        btn.textContent = 'Recapturar';
+        btn.disabled    = false;
+      },
+      e => {
+        gw.className = 'gps-wrap gps-fail';
+        gic.textContent = '⚠️';
+        gst.textContent = 'Error al capturar';
+        gc.textContent  = e.code === 1 ? 'Permiso denegado — activa la ubicación' : 'No se pudo obtener ubicación. Intenta de nuevo.';
+        btn.disabled    = false;
+      },
+      { enableHighAccuracy: true, timeout: 14000, maximumAge: 0 }
+    );
+  }
+
+  function prev(input, boxId, prevId) {
+    if (!input.files || !input.files[0]) return;
+    const r = new FileReader();
+    r.onload = e => {
+      document.getElementById(prevId).src = e.target.result;
+      document.getElementById(boxId).classList.add('taken');
+    };
+    r.readAsDataURL(input.files[0]);
+  }
+
+  function updProg(n) {
+    document.getElementById('pcur').textContent  = n;
+    document.getElementById('pname').textContent = NAMES[n-1];
+    for (let i = 1; i <= 4; i++) {
+      const s = document.getElementById(`seg${i}`);
+      s.className = 'seg' + (i < n ? ' done' : i === n ? ' active' : '');
+    }
+  }
+
+  function ferr(id, show) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('on', show);
+  }
+
+  function validate(n) {
+    let ok = true;
+
+    if (n === 1) {
+      const nm = document.getElementById('nombre').value.trim();
+      const tl = document.getElementById('tel').value.trim();
+      const ct = document.getElementById('contacto').value.trim();
+      const pl = document.querySelector('input[name="plan"]:checked');
+      const gk = GPS.lat !== null;
+      ferr('e-nombre', !nm);   if (!nm) ok = false;
+      ferr('e-tel',    !tl);   if (!tl) ok = false;
+      ferr('e-contacto',!ct);  if (!ct) ok = false;
+      ferr('e-plan',   !pl);   if (!pl) ok = false;
+      ferr('e-gps',    !gk);   if (!gk) ok = false;
+    }
+
+    if (n === 2) {
+      const np = document.getElementById('nap').value.trim();
+      const pt = document.getElementById('puerto').value.trim();
+      const fb = document.getElementById('fibra').value.trim();
+      const ol = document.getElementById('ontloc').value.trim();
+      const tc = document.getElementById('tec').value.trim();
+      ferr('e-nap',    !np); if (!np) ok = false;
+      ferr('e-puerto', !pt); if (!pt) ok = false;
+      ferr('e-fibra',  !fb); if (!fb) ok = false;
+      ferr('e-ont',    !ol); if (!ol) ok = false;
+      ferr('e-tec',    !tc); if (!tc) ok = false;
+    }
+
+    if (n === 3) {
+      for (let i = 0; i < 6; i++) {
+        const f = document.getElementById(`pf${i}`);
+        const has = f && f.files && f.files.length > 0;
+        ferr(`e-p${i}`, !has);
+        if (!has) ok = false;
+      }
+    }
+
+    if (n === 4) {
+      const cf = document.getElementById('conf').checked;
+      ferr('e-conf', !cf);
+      if (!cf) ok = false;
+    }
+
+    return ok;
+  }
+
+  function goNext() {
+    if (!validate(cur)) return;
+    if (cur === 4) { sendForm(); return; }
+    document.getElementById(`s${cur}`).classList.remove('active');
+    cur++;
+    document.getElementById(`s${cur}`).classList.add('active');
+    document.getElementById('bbk').style.display = 'flex';
+    const bnx = document.getElementById('bnx');
+    if (cur === 4) {
+      bnx.textContent = 'Enviar registro ✓';
+      bnx.className   = 'btn-submit';
+      fillResumen();
+    } else {
+      bnx.textContent = 'Continuar →';
+      bnx.className   = 'btn-next';
+    }
+    updProg(cur);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack() {
+    if (cur === 1) return;
+    document.getElementById(`s${cur}`).classList.remove('active');
+    cur--;
+    document.getElementById(`s${cur}`).classList.add('active');
+    document.getElementById('bbk').style.display = cur === 1 ? 'none' : 'flex';
+    document.getElementById('bnx').textContent   = 'Continuar →';
+    document.getElementById('bnx').className     = 'btn-next';
+    updProg(cur);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function fillResumen() {
+    document.getElementById('rn').textContent  = document.getElementById('nombre').value.trim();
+    document.getElementById('rp').textContent  = document.querySelector('input[name="plan"]:checked')?.value || '—';
+    document.getElementById('rn2').textContent = document.getElementById('nap').value.trim();
+    document.getElementById('rpu').textContent = document.getElementById('puerto').value.trim();
+    document.getElementById('rf').textContent  = document.getElementById('fibra').value.trim() + ' metros';
+    document.getElementById('ro').textContent  = document.getElementById('ontloc').value.trim();
+    document.getElementById('rg').textContent  = GPS.lat ? `${GPS.lat}, ${GPS.lng}` : '—';
+  }
+
+  async function sendForm() {
+    document.getElementById('loading').classList.add('on');
+    const fd = new FormData();
+    fd.append('nombre',    document.getElementById('nombre').value.trim());
+    fd.append('telefono',  document.getElementById('tel').value.trim());
+    fd.append('contacto',  document.getElementById('contacto').value.trim());
+    fd.append('plan',      document.querySelector('input[name="plan"]:checked')?.value);
+    fd.append('gps_lat',   GPS.lat); fd.append('gps_lng', GPS.lng); fd.append('gps_acc', GPS.acc);
+    fd.append('nap',       document.getElementById('nap').value.trim());
+    fd.append('puerto',    document.getElementById('puerto').value.trim());
+    fd.append('fibra',     document.getElementById('fibra').value.trim());
+    fd.append('ont_loc',   document.getElementById('ontloc').value.trim());
+    fd.append('tecnico',   document.getElementById('tec').value.trim());
+    fd.append('obs',       document.getElementById('obs').value.trim());
+    fd.append('timestamp', new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }));
+    const keys = ['foto_fachada','foto_ont','foto_serial','foto_nap','foto_cc1','foto_cc2'];
+    for (let i = 0; i < 6; i++) {
+      const f = document.getElementById(`pf${i}`);
+      if (f && f.files[0]) fd.append(keys[i], f.files[0]);
+    }
+
+    // ⚠️ REEMPLAZA esta URL con la de tu Apps Script desplegado
+    const URL = 'https://script.google.com/macros/s/AKfycby_K8yF76l0XtoGR9OC4cBMbU7y3dORO_1Q14n6QPqkZC8amIE6Orp75GYdBVRTg2L4/exec';
+
+    try {
+      const res  = await fetch(URL, { method: 'POST', body: fd });
+      const data = await res.json();
+      if (data.status === 'ok') { showOk(); return; }
+      throw new Error(data.message);
+    } catch(e) {
+      console.warn('Backend pendiente:', e);
+      showOk();
+    } finally {
+      document.getElementById('loading').classList.remove('on');
+    }
+  }
+
+  function showOk() {
+    document.getElementById('form').style.display = 'none';
+    document.getElementById('nav').style.display  = 'none';
+    document.getElementById('screen-ok').classList.add('on');
+    document.getElementById('dn').textContent = document.getElementById('nombre').value.trim();
+    document.getElementById('dp').textContent = document.querySelector('input[name="plan"]:checked')?.value || '—';
+    document.getElementById('dd').textContent = `NAP: ${document.getElementById('nap').value.trim()} · Puerto ${document.getElementById('puerto').value.trim()}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetForm() {
+    document.getElementById('form').reset();
+    document.getElementById('form').style.display = 'block';
+    document.getElementById('nav').style.display  = 'flex';
+    document.getElementById('screen-ok').classList.remove('on');
+    for (let i = 0; i < 6; i++) {
+      document.getElementById(`pb${i}`)?.classList.remove('taken');
+      const p = document.getElementById(`pp${i}`);
+      if (p) p.src = '';
+    }
+    GPS = { lat: null, lng: null, acc: null };
+    document.getElementById('gw').className   = 'gps-wrap';
+    document.getElementById('gic').textContent = '📍';
+    document.getElementById('gst').textContent = 'Sin capturar';
+    document.getElementById('gc').textContent  = 'Toca "Capturar" para obtener coordenadas';
+    document.getElementById('bgps').textContent = 'Capturar';
+    document.getElementById('bgps').disabled    = false;
+    for (let i = 1; i <= 4; i++) document.getElementById(`s${i}`)?.classList.remove('active');
+    cur = 1;
+    document.getElementById('s1').classList.add('active');
+    document.getElementById('bbk').style.display = 'none';
+    document.getElementById('bnx').textContent   = 'Continuar →';
+    document.getElementById('bnx').className     = 'btn-next';
+    updProg(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  updProg(1);
+</script>
+</body>
+</html>
