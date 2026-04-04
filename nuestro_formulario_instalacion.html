@@ -824,7 +824,7 @@
           <span class="hint">Captura automática — presiona el botón</span>
         </label>
         <div class="gps-wrap" id="gw">
-          <div class="gps-ic" id="gic">📍</div>
+          <div class="gps-ic" id="gic">ߓ</div>
           <div class="gps-body">
             <div class="gps-st" id="gst">Sin capturar</div>
             <div class="gps-coord" id="gc">Toca "Capturar" para obtener coordenadas</div>
@@ -898,7 +898,7 @@
           <span class="ph-lbl">Fachada <span class="r">*</span></span>
           <label class="ph-box" id="pb0">
             <input type="file" accept="image/*" capture="environment" id="pf0" onchange="prev(this,'pb0','pp0')">
-            <div class="ph-ph"><span class="ph-emoji">🏠</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Desde la calle, número visible</div></div>
+            <div class="ph-ph"><span class="ph-emoji">ߏ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Desde la calle, número visible</div></div>
             <img class="ph-prev" id="pp0" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p0">Foto obligatoria.</div>
@@ -908,7 +908,7 @@
           <span class="ph-lbl">ONT instalado <span class="r">*</span></span>
           <label class="ph-box" id="pb1">
             <input type="file" accept="image/*" capture="environment" id="pf1" onchange="prev(this,'pb1','pp1')">
-            <div class="ph-ph"><span class="ph-emoji">📡</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">ONT en ubicación final</div></div>
+            <div class="ph-ph"><span class="ph-emoji">ߓ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">ONT en ubicación final</div></div>
             <img class="ph-prev" id="pp1" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p1">Foto obligatoria.</div>
@@ -918,7 +918,7 @@
           <span class="ph-lbl">Etiqueta ONT <span class="r">*</span></span>
           <label class="ph-box" id="pb2">
             <input type="file" accept="image/*" capture="environment" id="pf2" onchange="prev(this,'pb2','pp2')">
-            <div class="ph-ph"><span class="ph-emoji">🔖</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Número de serie legible</div></div>
+            <div class="ph-ph"><span class="ph-emoji">ߔ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Número de serie legible</div></div>
             <img class="ph-prev" id="pp2" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p2">Foto obligatoria.</div>
@@ -928,7 +928,7 @@
           <span class="ph-lbl">Conexión NAP <span class="r">*</span></span>
           <label class="ph-box" id="pb3">
             <input type="file" accept="image/*" capture="environment" id="pf3" onchange="prev(this,'pb3','pp3')">
-            <div class="ph-ph"><span class="ph-emoji">🔌</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Puerto utilizado visible</div></div>
+            <div class="ph-ph"><span class="ph-emoji">ߔ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Puerto utilizado visible</div></div>
             <img class="ph-prev" id="pp3" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p3">Foto obligatoria.</div>
@@ -938,7 +938,7 @@
           <span class="ph-lbl">Cédula — frente <span class="r">*</span></span>
           <label class="ph-box" id="pb4">
             <input type="file" accept="image/*" capture="environment" id="pf4" onchange="prev(this,'pb4','pp4')">
-            <div class="ph-ph"><span class="ph-emoji">🪪</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Nombre y número legibles</div></div>
+            <div class="ph-ph"><span class="ph-emoji">ߪ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Nombre y número legibles</div></div>
             <img class="ph-prev" id="pp4" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p4">Foto obligatoria.</div>
@@ -948,7 +948,7 @@
           <span class="ph-lbl">Cédula — reverso <span class="r">*</span></span>
           <label class="ph-box" id="pb5">
             <input type="file" accept="image/*" capture="environment" id="pf5" onchange="prev(this,'pb5','pp5')">
-            <div class="ph-ph"><span class="ph-emoji">🪪</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Reverso del documento</div></div>
+            <div class="ph-ph"><span class="ph-emoji">ߪ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Reverso del documento</div></div>
             <img class="ph-prev" id="pp5" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p5">Foto obligatoria.</div>
@@ -1187,38 +1187,65 @@
     document.getElementById('rg').textContent  = GPS.lat ? `${GPS.lat}, ${GPS.lng}` : '—';
   }
 
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload  = e => resolve(e.target.result.split(',')[1]);
+      reader.onerror = () => reject(new Error('Error leyendo archivo'));
+      reader.readAsDataURL(file);
+    });
+  }
+
   async function sendForm() {
     document.getElementById('loading').classList.add('on');
-    const fd = new FormData();
-    fd.append('nombre',    document.getElementById('nombre').value.trim());
-    fd.append('telefono',  document.getElementById('tel').value.trim());
-    fd.append('contacto',  document.getElementById('contacto').value.trim());
-    fd.append('plan',      document.querySelector('input[name="plan"]:checked')?.value);
-    fd.append('gps_lat',   GPS.lat); fd.append('gps_lng', GPS.lng); fd.append('gps_acc', GPS.acc);
-    fd.append('nap',       document.getElementById('nap').value.trim());
-    fd.append('puerto',    document.getElementById('puerto').value.trim());
-    fd.append('fibra',     document.getElementById('fibra').value.trim());
-    fd.append('ont_loc',   document.getElementById('ontloc').value.trim());
-    fd.append('tecnico',   document.getElementById('tec').value.trim());
-    fd.append('obs',       document.getElementById('obs').value.trim());
-    fd.append('timestamp', new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }));
-    const keys = ['foto_fachada','foto_ont','foto_serial','foto_nap','foto_cc1','foto_cc2'];
+
+    // Convertir fotos a Base64
+    const fotoKeys  = ['foto_fachada','foto_ont','foto_serial','foto_nap','foto_cc1','foto_cc2'];
+    const fotoNames = ['1-Fachada','2-ONT','3-Serial','4-NAP','5-Cedula-Frente','6-Cedula-Reverso'];
+    const fotos = [];
     for (let i = 0; i < 6; i++) {
       const f = document.getElementById(`pf${i}`);
-      if (f && f.files[0]) fd.append(keys[i], f.files[0]);
+      if (f && f.files[0]) {
+        const b64 = await fileToBase64(f.files[0]);
+        fotos.push({ key: fotoKeys[i], name: fotoNames[i], data: b64, type: f.files[0].type });
+      }
     }
 
+    // Construir payload JSON
+    const payload = {
+      nombre:    document.getElementById('nombre').value.trim(),
+      telefono:  document.getElementById('tel').value.trim(),
+      contacto:  document.getElementById('contacto').value.trim(),
+      plan:      document.querySelector('input[name="plan"]:checked')?.value || '',
+      gps_lat:   GPS.lat,
+      gps_lng:   GPS.lng,
+      nap:       document.getElementById('nap').value.trim(),
+      puerto:    document.getElementById('puerto').value.trim(),
+      fibra:     document.getElementById('fibra').value.trim(),
+      ont_loc:   document.getElementById('ontloc').value.trim(),
+      tecnico:   document.getElementById('tec').value.trim(),
+      obs:       document.getElementById('obs').value.trim(),
+      timestamp: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
+      fotos:     fotos,
+    };
+
     // ⚠️ REEMPLAZA esta URL con la de tu Apps Script desplegado
-    const URL = 'https://script.google.com/macros/s/AKfycby_K8yF76l0XtoGR9OC4cBMbU7y3dORO_1Q14n6QPqkZC8amIE6Orp75GYdBVRTg2L4/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_K8yF76l0XtoGR9OC4cBMbU7y3dORO_1Q14n6QPqkZC8amIE6Orp75GYdBVRTg2L4/exec';
 
     try {
-      const res  = await fetch(URL, { method: 'POST', body: fd });
-      const data = await res.json();
+      const res = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload),
+      });
+      const text = await res.text();
+      const data = JSON.parse(text);
       if (data.status === 'ok') { showOk(); return; }
       throw new Error(data.message);
     } catch(e) {
-      console.warn('Backend pendiente:', e);
-      showOk();
+      console.error('Error al enviar:', e);
+      // Mostrar error real en lugar de éxito silencioso
+      alert('Error al enviar el registro: ' + e.message + '\n\nRevisa la consola para más detalles.');
     } finally {
       document.getElementById('loading').classList.remove('on');
     }
@@ -1246,7 +1273,7 @@
     }
     GPS = { lat: null, lng: null, acc: null };
     document.getElementById('gw').className   = 'gps-wrap';
-    document.getElementById('gic').textContent = '📍';
+    document.getElementById('gic').textContent = 'ߓ';
     document.getElementById('gst').textContent = 'Sin capturar';
     document.getElementById('gc').textContent  = 'Toca "Capturar" para obtener coordenadas';
     document.getElementById('bgps').textContent = 'Capturar';
