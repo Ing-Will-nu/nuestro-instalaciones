@@ -1151,6 +1151,14 @@
     r.onload = e => {
       document.getElementById(prevId).src = e.target.result;
       document.getElementById(boxId).classList.add('taken');
+      // Si es la foto NAP por cámara, limpiar galería y ocultar botones
+      if (input.id === 'pf3') {
+        window._napGalleryFile = null;
+        document.getElementById('nap-btns').style.display = 'none';
+        document.getElementById('nap-retake').style.display = 'block';
+        document.getElementById('pp3').style.display = 'block';
+        ferr('e-p3', false);
+      }
     };
     r.readAsDataURL(input.files[0]);
   }
@@ -1200,8 +1208,14 @@
 
     if (n === 3) {
       for (let i = 0; i < 6; i++) {
-        const f = document.getElementById(`pf${i}`);
-        const has = f && f.files && f.files.length > 0;
+        let has = false;
+        if (i === 3) {
+          const pf3 = document.getElementById('pf3');
+          has = (pf3 && pf3.files && pf3.files.length > 0) || !!window._napGalleryFile;
+        } else {
+          const f = document.getElementById(`pf${i}`);
+          has = f && f.files && f.files.length > 0;
+        }
         ferr(`e-p${i}`, !has);
         if (!has) ok = false;
       }
@@ -1263,18 +1277,21 @@
   // ── NAP GALERÍA ───────────────────────────────────────────────
   function prevNAP(input) {
     if (!input.files || !input.files[0]) return;
-    // Sincronizar archivo al input principal pf3 no es posible directamente,
-    // guardamos referencia separada
     window._napGalleryFile = input.files[0];
     const reader = new FileReader();
     reader.onload = e => {
-      const img = document.getElementById('pp3');
-      img.src = e.target.result;
-      img.style.display = 'block';
+      const img  = document.getElementById('pp3');
       const wrap = document.getElementById('pb3-wrap');
+      const btns = document.getElementById('nap-btns');
+      const ret  = document.getElementById('nap-retake');
+      img.src             = e.target.result;
+      img.style.display   = 'block';
       wrap.classList.add('taken');
-      document.getElementById('nap-btns').style.display = 'none';
-      document.getElementById('nap-retake').style.display = 'block';
+      wrap.style.padding  = '0';
+      btns.style.display  = 'none';
+      ret.style.display   = 'block';
+      // Quitar error si estaba visible
+      ferr('e-p3', false);
     };
     reader.readAsDataURL(input.files[0]);
   }
