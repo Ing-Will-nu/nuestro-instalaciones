@@ -739,6 +739,46 @@
     color: var(--text2);
   }
 
+  .ph-box-nap {
+    border: 2px dashed var(--border2);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    padding: 16px 8px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s;
+  }
+
+  .ph-box-nap.taken {
+    border-style: solid;
+    border-color: var(--purpura);
+    padding: 0;
+  }
+
+  .nap-btn-opt {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--azul-light);
+    border: 1.5px solid var(--azul);
+    border-radius: 7px;
+    color: var(--azul);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 7px 12px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .nap-btn-opt:hover { background: var(--azul); color: #fff; }
+
   @media (max-width: 340px) {
     .plan-grid, .photo-grid, .two { grid-template-columns: 1fr; }
   }
@@ -824,7 +864,7 @@
           <span class="hint">Captura automática — presiona el botón</span>
         </label>
         <div class="gps-wrap" id="gw">
-          <div class="gps-ic" id="gic">ߓ</div>
+          <div class="gps-ic" id="gic">📍</div>
           <div class="gps-body">
             <div class="gps-st" id="gst">Sin capturar</div>
             <div class="gps-coord" id="gc">Toca "Capturar" para obtener coordenadas</div>
@@ -888,7 +928,7 @@
     <div class="sec-header">
       <div class="sec-badge">03 · Evidencia fotográfica</div>
       <div class="sec-title">Registro fotográfico</div>
-      <div class="sec-desc">Seis fotos obligatorias. Toca cada recuadro para abrir la cámara.</div>
+      <div class="sec-desc">Seis fotos obligatorias. Toca cada recuadro para tomar la foto. La foto de conexión NAP permite elegir desde la galería.</div>
     </div>
 
     <div class="card">
@@ -898,7 +938,7 @@
           <span class="ph-lbl">Fachada <span class="r">*</span></span>
           <label class="ph-box" id="pb0">
             <input type="file" accept="image/*" capture="environment" id="pf0" onchange="prev(this,'pb0','pp0')">
-            <div class="ph-ph"><span class="ph-emoji">ߏ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Desde la calle, número visible</div></div>
+            <div class="ph-ph"><span class="ph-emoji">🏠</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Desde la calle, número visible</div></div>
             <img class="ph-prev" id="pp0" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p0">Foto obligatoria.</div>
@@ -908,7 +948,7 @@
           <span class="ph-lbl">ONT instalado <span class="r">*</span></span>
           <label class="ph-box" id="pb1">
             <input type="file" accept="image/*" capture="environment" id="pf1" onchange="prev(this,'pb1','pp1')">
-            <div class="ph-ph"><span class="ph-emoji">ߓ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">ONT en ubicación final</div></div>
+            <div class="ph-ph"><span class="ph-emoji">📡</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">ONT en ubicación final</div></div>
             <img class="ph-prev" id="pp1" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p1">Foto obligatoria.</div>
@@ -918,7 +958,7 @@
           <span class="ph-lbl">Etiqueta ONT <span class="r">*</span></span>
           <label class="ph-box" id="pb2">
             <input type="file" accept="image/*" capture="environment" id="pf2" onchange="prev(this,'pb2','pp2')">
-            <div class="ph-ph"><span class="ph-emoji">ߔ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Número de serie legible</div></div>
+            <div class="ph-ph"><span class="ph-emoji">🔖</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Número de serie legible</div></div>
             <img class="ph-prev" id="pp2" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p2">Foto obligatoria.</div>
@@ -926,11 +966,24 @@
 
         <div>
           <span class="ph-lbl">Conexión NAP <span class="r">*</span></span>
-          <label class="ph-box" id="pb3">
-            <input type="file" accept="image/*" capture="environment" id="pf3" onchange="prev(this,'pb3','pp3')">
-            <div class="ph-ph"><span class="ph-emoji">ߔ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Puerto utilizado visible</div></div>
-            <img class="ph-prev" id="pp3" alt=""><button class="ph-retake" type="button">Retomar</button>
-          </label>
+          <div class="ph-box-nap" id="pb3-wrap">
+            <div class="nap-btns" id="nap-btns">
+              <span class="ph-emoji" style="font-size:1.5rem;display:block;margin-bottom:6px">🔌</span>
+              <div class="ph-txt" style="font-family:'Montserrat',sans-serif;font-size:.63rem;font-weight:700;color:var(--text2);margin-bottom:8px">Conexión NAP</div>
+              <div style="display:flex;gap:8px;justify-content:center">
+                <label class="nap-btn-opt">
+                  <input type="file" accept="image/*" capture="environment" id="pf3" onchange="prev(this,'pb3-wrap','pp3')" style="position:absolute;opacity:0;width:0;height:0">
+                  <span>📷 Cámara</span>
+                </label>
+                <label class="nap-btn-opt">
+                  <input type="file" accept="image/*" id="pf3b" onchange="prevNAP(this)" style="position:absolute;opacity:0;width:0;height:0">
+                  <span>🖼 Galería</span>
+                </label>
+              </div>
+            </div>
+            <img class="photo-prev" id="pp3" alt="" style="width:100%;height:108px;object-fit:cover;border-radius:calc(var(--radius-sm) - 2px);display:none;">
+            <button class="ph-retake" type="button" id="nap-retake" onclick="retakeNAP()" style="display:none;position:absolute;bottom:5px;right:5px;background:rgba(0,0,0,0.5);border:none;border-radius:4px;color:#fff;font-size:.56rem;font-weight:700;padding:3px 6px;font-family:'Montserrat',sans-serif;">Retomar</button>
+          </div>
           <div class="ferr" id="e-p3">Foto obligatoria.</div>
         </div>
 
@@ -938,7 +991,7 @@
           <span class="ph-lbl">Cédula — frente <span class="r">*</span></span>
           <label class="ph-box" id="pb4">
             <input type="file" accept="image/*" capture="environment" id="pf4" onchange="prev(this,'pb4','pp4')">
-            <div class="ph-ph"><span class="ph-emoji">ߪ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Nombre y número legibles</div></div>
+            <div class="ph-ph"><span class="ph-emoji">🪪</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Nombre y número legibles</div></div>
             <img class="ph-prev" id="pp4" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p4">Foto obligatoria.</div>
@@ -948,7 +1001,7 @@
           <span class="ph-lbl">Cédula — reverso <span class="r">*</span></span>
           <label class="ph-box" id="pb5">
             <input type="file" accept="image/*" capture="environment" id="pf5" onchange="prev(this,'pb5','pp5')">
-            <div class="ph-ph"><span class="ph-emoji">ߪ</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Reverso del documento</div></div>
+            <div class="ph-ph"><span class="ph-emoji">🪪</span><div class="ph-txt">Tomar foto</div><div class="ph-sub">Reverso del documento</div></div>
             <img class="ph-prev" id="pp5" alt=""><button class="ph-retake" type="button">Retomar</button>
           </label>
           <div class="ferr" id="e-p5">Foto obligatoria.</div>
@@ -972,7 +1025,7 @@
     <div class="sec-header">
       <div class="sec-badge">04 · Cierre</div>
       <div class="sec-title">Confirmación del cliente</div>
-      <div class="sec-desc">Muéstrale este resumen al cliente. Si está conforme, marca la casilla y envía.</div>
+      <div class="sec-desc">Muéstrale este resumen al cliente. Si está conforme, que firme en el recuadro y envía.</div>
     </div>
 
     <div class="resumen">
@@ -988,14 +1041,32 @@
       <div class="res-row"><span class="res-k">GPS</span><span class="res-v" id="rg">—</span></div>
     </div>
 
-    <label class="confirm-box" for="conf">
-      <input type="checkbox" id="conf">
-      <div class="confirm-txt">
-        <strong>Recibo a satisfacción ✓</strong>
-        Confirmo que el servicio de internet fue instalado correctamente en mi inmueble y que los equipos funcionan según lo acordado con Nuestro Internet.
+    <div class="card">
+      <div class="field">
+        <label class="lbl">Firma del cliente <span class="r">*</span>
+          <span class="hint">El cliente firma con el dedo o lápiz táctil en el recuadro</span>
+        </label>
+        <div style="position:relative;">
+          <canvas id="sig-canvas"
+            style="width:100%;height:160px;border:2px solid var(--border2);border-radius:var(--radius-sm);background:#fff;display:block;touch-action:none;cursor:crosshair;">
+          </canvas>
+          <div id="sig-placeholder"
+            style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+            <div style="text-align:center;">
+              <div style="font-size:2rem;margin-bottom:6px;">✍️</div>
+              <div style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;color:var(--muted);">Firmar aquí</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+          <button type="button" onclick="clearSignature()"
+            style="background:transparent;border:1.5px solid var(--border2);border-radius:6px;color:var(--text2);font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;padding:6px 12px;cursor:pointer;">
+            Borrar firma
+          </button>
+        </div>
+        <div class="ferr" id="e-conf" style="margin-top:4px;">El cliente debe firmar antes de enviar.</div>
       </div>
-    </label>
-    <div class="ferr" id="e-conf" style="margin-top:8px;">El cliente debe confirmar la recepción del servicio.</div>
+    </div>
   </div>
 
 </form>
@@ -1137,9 +1208,9 @@
     }
 
     if (n === 4) {
-      const cf = document.getElementById('conf').checked;
-      ferr('e-conf', !cf);
-      if (!cf) ok = false;
+      const signed = !sigEmpty && sigCanvas;
+      ferr('e-conf', !signed);
+      if (!signed) ok = false;
     }
 
     return ok;
@@ -1185,6 +1256,109 @@
     document.getElementById('rf').textContent  = document.getElementById('fibra').value.trim() + ' metros';
     document.getElementById('ro').textContent  = document.getElementById('ontloc').value.trim();
     document.getElementById('rg').textContent  = GPS.lat ? `${GPS.lat}, ${GPS.lng}` : '—';
+    // Inicializar canvas de firma cuando se muestra la sección 4
+    setTimeout(initSignature, 100);
+  }
+
+  // ── NAP GALERÍA ───────────────────────────────────────────────
+  function prevNAP(input) {
+    if (!input.files || !input.files[0]) return;
+    // Sincronizar archivo al input principal pf3 no es posible directamente,
+    // guardamos referencia separada
+    window._napGalleryFile = input.files[0];
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.getElementById('pp3');
+      img.src = e.target.result;
+      img.style.display = 'block';
+      const wrap = document.getElementById('pb3-wrap');
+      wrap.classList.add('taken');
+      document.getElementById('nap-btns').style.display = 'none';
+      document.getElementById('nap-retake').style.display = 'block';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  function retakeNAP() {
+    const wrap = document.getElementById('pb3-wrap');
+    wrap.classList.remove('taken');
+    document.getElementById('pp3').style.display = 'none';
+    document.getElementById('pp3').src = '';
+    document.getElementById('nap-btns').style.display = 'block';
+    document.getElementById('nap-retake').style.display = 'none';
+    document.getElementById('pf3').value  = '';
+    document.getElementById('pf3b').value = '';
+    window._napGalleryFile = null;
+  }
+
+  // ── FIRMA ─────────────────────────────────────────────────────
+  let sigCanvas, sigCtx, signing = false, sigEmpty = true;
+
+  function initSignature() {
+    sigCanvas = document.getElementById('sig-canvas');
+    if (!sigCanvas) return;
+    sigCtx = sigCanvas.getContext('2d');
+
+    // Ajustar resolución del canvas al tamaño real en pantalla
+    const rect = sigCanvas.getBoundingClientRect();
+    sigCanvas.width  = rect.width  * window.devicePixelRatio;
+    sigCanvas.height = rect.height * window.devicePixelRatio;
+    sigCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    sigCtx.strokeStyle = '#1E293B';
+    sigCtx.lineWidth   = 2.5;
+    sigCtx.lineCap     = 'round';
+    sigCtx.lineJoin    = 'round';
+
+    // Touch events
+    sigCanvas.addEventListener('touchstart', e => {
+      e.preventDefault();
+      signing = true;
+      sigEmpty = false;
+      document.getElementById('sig-placeholder').style.display = 'none';
+      const t = e.touches[0];
+      const r = sigCanvas.getBoundingClientRect();
+      sigCtx.beginPath();
+      sigCtx.moveTo(t.clientX - r.left, t.clientY - r.top);
+    }, { passive: false });
+
+    sigCanvas.addEventListener('touchmove', e => {
+      e.preventDefault();
+      if (!signing) return;
+      const t = e.touches[0];
+      const r = sigCanvas.getBoundingClientRect();
+      sigCtx.lineTo(t.clientX - r.left, t.clientY - r.top);
+      sigCtx.stroke();
+    }, { passive: false });
+
+    sigCanvas.addEventListener('touchend', () => { signing = false; });
+
+    // Mouse events (para pruebas en desktop)
+    sigCanvas.addEventListener('mousedown', e => {
+      signing = true; sigEmpty = false;
+      document.getElementById('sig-placeholder').style.display = 'none';
+      const r = sigCanvas.getBoundingClientRect();
+      sigCtx.beginPath();
+      sigCtx.moveTo(e.clientX - r.left, e.clientY - r.top);
+    });
+    sigCanvas.addEventListener('mousemove', e => {
+      if (!signing) return;
+      const r = sigCanvas.getBoundingClientRect();
+      sigCtx.lineTo(e.clientX - r.left, e.clientY - r.top);
+      sigCtx.stroke();
+    });
+    sigCanvas.addEventListener('mouseup', () => { signing = false; });
+  }
+
+  function clearSignature() {
+    if (!sigCanvas) return;
+    sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+    sigEmpty = true;
+    document.getElementById('sig-placeholder').style.display = 'flex';
+  }
+
+  function getSignatureBase64() {
+    if (!sigCanvas || sigEmpty) return null;
+    return sigCanvas.toDataURL('image/png').split(',')[1];
   }
 
   function fileToBase64(file) {
@@ -1204,14 +1378,20 @@
     const fotoNames = ['1-Fachada','2-ONT','3-Serial','4-NAP','5-Cedula-Frente','6-Cedula-Reverso'];
     const fotos = [];
     for (let i = 0; i < 6; i++) {
-      const f = document.getElementById(`pf${i}`);
-      if (f && f.files[0]) {
-        const b64 = await fileToBase64(f.files[0]);
-        fotos.push({ key: fotoKeys[i], name: fotoNames[i], data: b64, type: f.files[0].type });
+      let file = null;
+      if (i === 3) {
+        const pf3 = document.getElementById('pf3');
+        file = (pf3 && pf3.files[0]) ? pf3.files[0] : (window._napGalleryFile || null);
+      } else {
+        const f = document.getElementById(`pf${i}`);
+        file = f && f.files[0] ? f.files[0] : null;
+      }
+      if (file) {
+        const b64 = await fileToBase64(file);
+        fotos.push({ key: fotoKeys[i], name: fotoNames[i], data: b64, type: file.type });
       }
     }
 
-    // Construir payload JSON
     const payload = {
       nombre:    document.getElementById('nombre').value.trim(),
       telefono:  document.getElementById('tel').value.trim(),
@@ -1226,6 +1406,7 @@
       tecnico:   document.getElementById('tec').value.trim(),
       obs:       document.getElementById('obs').value.trim(),
       timestamp: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
+      firma:     getSignatureBase64(),
       fotos:     fotos,
     };
 
@@ -1273,7 +1454,7 @@
     }
     GPS = { lat: null, lng: null, acc: null };
     document.getElementById('gw').className   = 'gps-wrap';
-    document.getElementById('gic').textContent = 'ߓ';
+    document.getElementById('gic').textContent = '📍';
     document.getElementById('gst').textContent = 'Sin capturar';
     document.getElementById('gc').textContent  = 'Toca "Capturar" para obtener coordenadas';
     document.getElementById('bgps').textContent = 'Capturar';
@@ -1284,6 +1465,10 @@
     document.getElementById('bbk').style.display = 'none';
     document.getElementById('bnx').textContent   = 'Continuar →';
     document.getElementById('bnx').className     = 'btn-next';
+    // Reset firma
+    sigEmpty = true; sigCanvas = null; sigCtx = null;
+    window._napGalleryFile = null;
+    retakeNAP();
     updProg(1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
