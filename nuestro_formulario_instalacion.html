@@ -1431,8 +1431,8 @@
         file = f && f.files[0] ? f.files[0] : null;
       }
       if (file) {
-        // Comprimir a máximo 1200px de ancho y calidad 0.7 — reduce ~80% el peso
-        const b64 = await compressImage(file, 1200, 0.7);
+        // Comprimir a máximo 800px de ancho y calidad 0.5 — reduce ~95% el peso
+        const b64 = await compressImage(file, 800, 0.5);
         fotos.push({ key: fotoKeys[i], name: fotoNames[i], data: b64, type: 'image/jpeg' });
       }
     }
